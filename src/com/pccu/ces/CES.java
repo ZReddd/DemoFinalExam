@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Scanner;
 
+@SuppressWarnings("unused")
 public class CES extends Student {
 
 	private static ArrayList<Student> list ;
@@ -28,8 +29,51 @@ public class CES extends Student {
 		/*
 		 * Your Work !
 		 * */
+		FileWriter fileWriter = null;
+        PrintWriter printWriter = null;
+        String record = "";
+        
+        try {
+			fileWriter = new FileWriter(filepath);
+			printWriter = new PrintWriter(fileWriter);
+	        
+	        Iterator<Student> it = list.iterator();
+	        while (it.hasNext()) {
+	        	Student s = it.next();
+	        	record = "";
+	        	record = s.getId()   + " " + 
+	        	         s.getName() + " " + 
+	        			 s.getChi()  + " " + 
+	        	         s.getEng()  + " " + 
+	        			 s.getMath() + " " +
+	        	         s.mAvg ;
+	        	
+	        	printWriter.println(record);
+			}
+	        
+		} catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            
+        	if (printWriter != null) {
+                printWriter.close();
+            }
+            
+            if (fileWriter != null) {
+                try {
+                    fileWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
 	}
 	
+	
+	@SuppressWarnings("resource")
 	private static void ScoreEnrollment () {
 		
 		int cnt = 3;
@@ -60,6 +104,7 @@ public class CES extends Student {
 		
 	}
 	
+	@SuppressWarnings("resource")
 	private static void InqueryByIDFromFile (String filepath) {
 		int id;
 		System.out.println("Enter ID :");
@@ -77,6 +122,7 @@ public class CES extends Student {
 		System.out.println("*************************");
 	}
 	
+	@SuppressWarnings({ "unused", "resource" })
 	private static void InqueryByID () {
 		int id;
 		System.out.println("Enter ID :");
@@ -118,6 +164,7 @@ public class CES extends Student {
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
